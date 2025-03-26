@@ -1,0 +1,34 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.calculator {
+  width: 400px;
+  height: 600px;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.row {
+  display: flex;
+  height: 17%;
+  gap: 10px;
+  padding: 10px;
+}
+
+.row.display {
+  border: 2px dashed green;
+}
+
+button {
+  width: 25%;
+  border-radius: 25%;
+}
