@@ -16,42 +16,61 @@ function divide(a, b) {
   return a / b;
 }
 
-function operate(operator) {
-  //check if user has already two values
-  if (operation) {
-    const a = Number(prev);
-    const b = Number(next);
-    switch (operation) {
-      case "+":
-        prev = add(a, b);
-        break;
-      case "-":
-        prev = subtract(a, b);
-        break;
-      case "*":
-        prev = multiply(a, b);
-        break;
-      case "/":
-        prev = subtract(a, b);
-        break;
-    }
-    display.innerText = prev;
-    next = "";
-    operation = "";
-  } else {
-    operation = operator;
-    display.innerText = "";
-    total = next;
-    prev = "";
+function calculate() {
+  const a = Number(prev);
+  const b = Number(next);
+  switch (operation) {
+    case "+":
+      prev = add(a, b);
+      break;
+    case "-":
+      prev = subtract(a, b);
+      break;
+    case "X":
+      prev = multiply(a, b);
+      break;
+    case "/":
+      prev = divide(a, b);
+      break;
   }
 }
 
+function operate(operator) {
+  //check if user has already two values - if so then calcuate based on operator
+  if (operation) {
+    calculate();
+    display.innerText = prev;
+  } else {
+    display.innerText = operator === "=" ? display.innerText : "";
+    prev = next;
+  }
+
+  operation = operator;
+  next = "";
+}
+
+function clearCalculator() {
+  prev = "";
+  next = "";
+  operation = "";
+  display.innerText = "";
+}
+
 function checkInput(input) {
-  if (input >= "0" && input <= "9") {
+  if ((input >= "0" && input <= "9") || input === ".") {
     next += input;
     display.innerText = next;
-  } else if (input === "+" || input === "-" || input === "*" || input === "/") {
+  } else if (
+    input === "+" ||
+    input === "-" ||
+    input === "X" ||
+    input === "/" ||
+    input === "="
+  ) {
     operate(input);
+  } else if (input === "AC") {
+    7.999999999999999;
+    clearCalculator();
   }
 }
 
