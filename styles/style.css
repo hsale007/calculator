@@ -29,7 +29,6 @@ body {
 
 .row.display {
   flex: 1.5;
-  margin-bottom: 15px;
 }
 
 .row.buttons {
@@ -64,13 +63,20 @@ button {
   border: none;
 }
 
+/*
 button[value="0"] {
   flex: 2;
   padding-right: 20px;
 }
+*/
 
 button:hover {
   opacity: 0.8;
+}
+
+button:active {
+  transition: 0.4;
+  transform: scale(0.9);
 }
 
 .number {
@@ -87,4 +93,14 @@ button:hover {
 .delete {
   background-color: rgb(226, 126, 31);
   box-shadow: 0px 10px 0px #bd5214;
+}
+
+.operator.active {
+  background-color: #31631a;
+  box-shadow: 0px 10px 0px #2e7543;
+}
+
+button[value="="]:active {
+  background-color: #31631a;
+  box-shadow: 0px 10px 0px #2e7543;
 }

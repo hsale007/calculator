@@ -2,6 +2,14 @@ let prev = "";
 let next = "";
 let operation = "";
 const display = document.querySelector(".userInput");
+const buttons = document.querySelectorAll("button");
+
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const input = button.value;
+    checkInput(input);
+  });
+});
 
 function add(a, b) {
   return a + b;
@@ -14,6 +22,10 @@ function multiply(a, b) {
 }
 function divide(a, b) {
   return a / b;
+}
+
+function modulo(a, b) {
+  return a % b;
 }
 
 function calculate() {
@@ -30,9 +42,17 @@ function calculate() {
       prev = multiply(a, b);
       break;
     case "/":
+      if (b === 0) {
+        prev = "NOT ALLOWED";
+        return;
+      }
       prev = divide(a, b);
       break;
+    case "%":
+      prev = modulo(a, b);
+      break;
   }
+  prev = parseFloat(prev.toFixed(5));
 }
 
 function operate(operator) {
@@ -40,11 +60,11 @@ function operate(operator) {
   if (operation) {
     calculate();
     display.innerText = prev;
+    if (isNaN(prev)) prev = "";
   } else {
-    display.innerText = operator === "=" ? display.innerText : ""; // no operattor provided
-    prev = next ? next : prev; //continue operations based off reseult if user has not entered a new value
+    //continue operations based off result if user has not entered a new value (ie user press = with only one value)
+    prev = next ? next : prev;
   }
-
   operation = operator === "=" ? "" : operator;
   next = "";
 }
@@ -56,8 +76,20 @@ function clearCalculator() {
   display.innerText = "";
 }
 
+function toggleOperator(input) {
+  const activeButton = document.querySelector(".active");
+  if (activeButton) activeButton.classList.toggle("active");
+  if (input !== "=")
+    document
+      .querySelector(`button[value="${input}"]`)
+      .classList.toggle("active");
+}
+
 function checkInput(input) {
-  if ((input >= "0" && input <= "9") || input === ".") {
+  if (
+    (input >= "0" && input <= "9") ||
+    (input === "." && !next.includes("."))
+  ) {
     next += input;
     display.innerText = next;
   } else if (
@@ -65,19 +97,26 @@ function checkInput(input) {
     input === "-" ||
     input === "X" ||
     input === "/" ||
+    input === "%" ||
     input === "="
   ) {
+    toggleOperator(input);
     operate(input);
   } else if (input === "AC") {
     clearCalculator();
+  } else if (input === "DE") {
+    if (!next) {
+      next = prev + "";
+      prev = "";
+    }
+    next = next.slice(0, -1);
+    display.innerText = next;
+  } else if (input === "+/-") {
+    if (!next) {
+      next = prev;
+      prev = "";
+    }
+    next = -Number(next) + "";
+    display.innerText = next;
   }
 }
-
-const buttons = document.querySelectorAll("button");
-
-buttons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const input = button.innerText;
-    checkInput(input);
-  });
-});
