@@ -3,12 +3,20 @@ let next = "";
 let operation = "";
 const display = document.querySelector(".userInput");
 const buttons = document.querySelectorAll("button");
+const body = document.querySelector("body");
 
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
     const input = button.value;
     checkInput(input);
   });
+});
+
+body.addEventListener("keypress", (e) => {
+  let key = e.key;
+  key = key === "Enter" ? "=" : key;
+  key = key === "*" || key === "x" ? "X" : key;
+  checkInput(key);
 });
 
 function add(a, b) {
@@ -39,6 +47,7 @@ function calculate() {
       prev = subtract(a, b);
       break;
     case "X":
+    case "x":
       prev = multiply(a, b);
       break;
     case "/":
@@ -96,6 +105,7 @@ function checkInput(input) {
     input === "+" ||
     input === "-" ||
     input === "X" ||
+    input === "x" ||
     input === "/" ||
     input === "%" ||
     input === "="

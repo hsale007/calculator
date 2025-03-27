@@ -6,7 +6,6 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
   font-family: monospace, sans-serif;
   background-color: lightblue;
   height: 100vh;
@@ -27,23 +26,24 @@ body {
   display: flex;
 }
 
-.row.display {
-  flex: 1.5;
-}
-
 .row.buttons {
   margin-top: 15px;
   gap: 10px;
 }
-
+textarea {
+  border: none;
+  background-color: transparent;
+  resize: none;
+  outline: none;
+}
 .display {
+  flex: 1.5;
   height: 125px;
   background-color: black;
-  text-align: bottom;
   display: flex;
-  justify-content: flex-end;
   align-items: center;
   border-radius: 10px;
+  text-align: right;
 }
 
 .userInput {
@@ -51,6 +51,8 @@ body {
   text-shadow: 1.3px 1.3px #383838;
   color: white;
   padding: 10px;
+  outline: 0px;
+  width: 100%;
 }
 
 button {
