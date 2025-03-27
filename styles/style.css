@@ -6,29 +6,85 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  font-family: monospace, sans-serif;
+  background-color: lightblue;
+  height: 100vh;
 }
 
 .calculator {
   width: 400px;
-  height: 600px;
-  border: 1px solid black;
+  height: 500px;
+  border: 10px solid black;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  padding: 15px;
+  background-color: white;
 }
-
 .row {
+  flex: 1;
   display: flex;
-  height: 17%;
-  gap: 10px;
-  padding: 10px;
 }
 
 .row.display {
-  border: 2px dashed green;
+  flex: 1.5;
+  margin-bottom: 15px;
+}
+
+.row.buttons {
+  margin-top: 15px;
+  gap: 10px;
+}
+
+.display {
+  height: 125px;
+  background-color: black;
+  text-align: bottom;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.userInput {
+  font-size: 58px;
+  text-shadow: 1.3px 1.3px #383838;
+  color: white;
+  padding: 10px;
 }
 
 button {
-  width: 25%;
-  border-radius: 25%;
+  flex: 1;
+  border-radius: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  font-weight: bold;
+  border: none;
+}
+
+button[value="0"] {
+  flex: 2;
+  padding-right: 20px;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.number {
+  background-color: #ad6faa;
+  box-shadow: 0px 10px 0px #612959;
+}
+
+.operator {
+  background-color: #ad6f6f;
+  box-shadow: 0px 10px 0px #612930;
+}
+
+.reset,
+.delete {
+  background-color: rgb(226, 126, 31);
+  box-shadow: 0px 10px 0px #bd5214;
 }

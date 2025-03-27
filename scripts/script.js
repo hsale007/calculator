@@ -41,11 +41,11 @@ function operate(operator) {
     calculate();
     display.innerText = prev;
   } else {
-    display.innerText = operator === "=" ? display.innerText : "";
-    prev = next;
+    display.innerText = operator === "=" ? display.innerText : ""; // no operattor provided
+    prev = next ? next : prev; //continue operations based off reseult if user has not entered a new value
   }
 
-  operation = operator;
+  operation = operator === "=" ? "" : operator;
   next = "";
 }
 
@@ -69,7 +69,6 @@ function checkInput(input) {
   ) {
     operate(input);
   } else if (input === "AC") {
-    7.999999999999999;
     clearCalculator();
   }
 }
